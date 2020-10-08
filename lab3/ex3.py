@@ -1,159 +1,323 @@
+#refactoring - Taisiia Karasova
+
 import pygame.draw as pgd
 import pygame as pg
 import math as m
 
-
-def draw_tree(screen, x, y, size_x, size_y, color):
-    #the center(x,y) of the tree is the point in the middle of its trunk
-    #bottom part of trunk
-    pgd.line(screen, color, [x, y + int(size_y/60)], 
-                            [x, y + int(size_y/4)], 
-                            int(size_x/18))
-    pgd.line(screen, color, [x, y + int(17*size_y/60)], 
-                            [x, y + int(size_y/2)], 
-                            int(size_x/18))
-    #right and bottom branch
-    pgd.arc(screen, tree_color, [[x, y - int(5*size_y/57)], 
-                                 [int(14*size_x/35), int(size_y/2 + 5*size_y/57)]],
-                                 6*m.pi/14, 4*m.pi/5, 4)
-    #top part of trunk
-    pgd.polygon(screen, tree_color, [[x, y], 
-                                     [x - int(size_x/22), y - int(size_y/80)], 
-                                     [x, y - int(17.5*size_y/116)], 
-                                     [x + int(size_x/22), y - int(16*size_y/116)]])
-    pgd.polygon(screen, tree_color, [[x + int(size_x/80), y - int(size_y/6 + 0.5*size_y/100)], 
-                                     [x - int(size_x/80), y - int(17*size_y/96)], 
-                                     [x + int(size_x/18), y - int(size_y/2 + 1*size_y/100 )], 
-                                     [x + int(7*size_x/86), y - int(size_y/2 + 0.5*size_y/100)]])
-    #leaves on right and bottom branch
-    delta_1 = int(5*size_x/37)
-    for i in range(3):
-        pgd.ellipse(screen, tree_color, [[x + delta_1, y - int(5*size_y/70)], 
-                                         [int(size_x/40), int(5*size_y/35)]])
-        delta_1 += int(3*size_x/60)
-    
-    #right and top branch and leaves on it
-    pgd.arc(screen, tree_color, [[x + int(5*size_x/80), y - int(size_y/2)], 
-                                 [int(size_x - 5*size_x/40), int(30*size_y/35)]],
-            m.pi/2, 9*m.pi/10, 4)
-    delta_2x = int(8*size_x/24)
-    delta_2y = int(32*size_y/70)
-    for i in range(5):
-        pgd.ellipse(screen, tree_color, [[x + delta_2x, y - delta_2y], 
-                                         [int(size_x/40), int(5*size_y/35)]])
-        delta_2x += int(3*size_x/80)
-        delta_2y += int(size_y/70)
-    #left top branch and leaves
-    pgd.arc(screen, tree_color, [[x - size_x, y - int(size_y/2)], 
-                                 [size_x, size_y]],
-            m.pi/10, m.pi/2, 4)
-    delta_3x = int(2.5*size_x/8)
-    delta_3y = int(3.5*size_y/8)
-    for i in range(5):
-        pgd.ellipse(screen, tree_color, [[x - delta_3x, y - delta_3y], 
-                                         [int(size_x/40), int(5*size_y/35)]])
-        delta_3x += int(3*size_x/80)
-        delta_3y += int(size_y/70)
-        #left top branch and leaves
-    pgd.arc(screen, tree_color, [[x - int(22*size_x/48), y], 
-                                 [int(22*size_x/48), int(size_y/2)]],
-            m.pi/6, 2.5*m.pi/4, 4)
-    delta_4 = int(size_x/6)
-    for i in range(3):
-        pgd.ellipse(screen, tree_color, [[x - delta_4, y], 
-                                         [int(size_x/40), int(5*size_y/35)]])
-        delta_4 += int(3*size_x/60)
-
-
-def draw_panda(screen, x, y, size_x, size_y, color_1, color_2, background_color):
-    #the center(x,y) of the panda is its nose
-    #body of the panda
-    pgd.ellipse(screen, color_2, [[x - int(5*size_x/53), y - int(25*size_y/60)],
-                                  [int(47*size_x/53), int(27*size_y/60)]])
-    #legs
-    pgd.polygon(screen, color_1, [[x + int(28*size_x/53), y - int(23*size_y/60)],
-                                  [x + int(28*size_x/53), y + int(4*size_y/60)],
-                                  [x + int(23*size_x/53), y + int(20*size_y/60)],
-                                  [x + int(18*size_x/53), y + int(27*size_y/60)],
-                                  [x + int(4*size_x/53), y + int(20*size_y/60)],
-                                  [x + int(13*size_x/53), y + int(12*size_y/60)]])
-    pgd.polygon(screen, color_1, [[x - int(4*size_x/53), y - int(9*size_y/60)],
-                                  [x + int(8*size_x/53), y - int(3*size_y/60)],
-                                  [x + int(10*size_x/53), y + int(10*size_y/60)],
-                                  [x + int(3*size_x/53), y + int(20*size_y/60)],
-                                  [x - int(6*size_x/53), y + int(15*size_y/60)]])
-    pgd.polygon(screen , background_color, [[x + int(18*size_x/53), y + int(27*size_y/60)],
-                                            [x + int(12*size_x/53), y + int(25*size_y/60)],
-                                            [x + int(20*size_x/53), y + int(25*size_y/60)]])
-    pgd.polygon(screen , background_color, [[x + int(4*size_x/53), y + int(20*size_y/60)],
-                                            [x + int(6*size_x/53), y + int(18*size_y/60)],
-                                            [x + int(6*size_x/53), y + int(24*size_y/60)]])
-    pgd.polygon(screen, color_1, [[x + int(40*size_x/53), y - int(10*size_y/60)],
-                                  [x + int(40*size_x/53), y + int(8*size_y/60)],
-                                  [x + int(30*size_x/53), y + int(21*size_y/60)],
-                                  [x + int(20*size_x/53), y + int(15*size_y/60)]])
-    pgd.polygon(screen , color_2, [[x + int(40*size_x/53), y - int(10*size_y/60)],
-                                   [x + int(41*size_x/53), y - int(8*size_y/60)],
-                                   [x + int(37*size_x/53), y - int(8*size_y/60)]])
-    pgd.polygon(screen , background_color, [[x + int(42*size_x/53), y + int(8*size_y/60)],
-                                            [x + int(38*size_x/53), y + int(13*size_y/60)],
-                                            [x + int(40*size_x/53), y + int(6*size_y/60)]])
-    pgd.polygon(screen , background_color, [[x + int(30*size_x/53), y + int(21*size_y/60)],
-                                            [x + int(32*size_x/53), y + int(19*size_y/60)],
-                                            [x + int(26*size_x/53), y + int(19*size_y/60)]])
-    #ears 1
-    pgd.ellipse(screen, color_1, [[x + int(15*size_x/53), y - int(30*size_y/60)],
-                                  [int(12*size_x/53), int(20*size_y/60)]])
-    pgd.ellipse(screen, color_1, [[x - int(6*size_x/53), y - int(32*size_y/60)],
-                                  [int(16*size_x/53), int(15*size_y/60)]])
-    #head
-    pgd.polygon(screen, color_2, [[x, y],
-                                  [x + int(25*size_x/55), y - int(7*size_y/65)],
-                                  [x + int(25*size_x/55), y- int(25*size_y)/65],
-                                  [x + int(25*size_x/110), y - int(35*size_y/65)],
-                                  [x, y - int(30*size_y/65)],
-                                  [x - int(5*size_x/55), y - int(30*size_y/130)]])
-    pgd.polygon(screen, background_color, [[x + int(25*size_x/110), y - int(35*size_y/63)],
-                                           [x + int(9*size_x/53), y - int(31*size_y/60)],
-                                           [x + int(15*size_x/53), y - int(30*size_y/60)]]) 
-    pgd.polygon(screen, color_1, [[x + int(25*size_x/55), y - int(7*size_y/65)],
-                                  [x + int(21*size_x/53), y - int(5*size_y/60)],
-                                  [x + int(24*size_x/53), y - int(9*size_y/60)]])
-    #eyes, nose and ears 2
-    pgd.ellipse(screen, color_1, [[x - int(3*size_x/50), y - int(3*size_y/55)], 
-                                  [int(3*size_x/25), int(4*size_y/55)]])
-    pgd.ellipse(screen, color_1, [[x - int(5*size_x/53), y - int(15*size_y/60)],
-                                  [int(6*size_x/53), int(7*size_y/60)]])
-    pgd.circle(screen, color_1, (x + int(10*size_x/53), y - int(10*size_y/60)), int(4*size_x/53))
-    pgd.polygon(screen, color_1, [[x - int(3*size_x/53), y - int(19*size_y/60)],
-                                  [x + int(6*size_x/53), y - int(30*size_y/60)],
-                                  [x - int(1*size_x/53), y - int(29*size_y/60)]])
-    pgd.polygon(screen, color_1, [[x + int(24*size_x/53), y - int(12*size_y/60)],
-                                  [x + int(20*size_x/53), y - int(30*size_y/60)],
-                                  [x + int(26*size_x/53), y - int(25*size_y/60)]])    
-
-
 pg.init()
 
-#define variables
+def draw_trunk (screen, x, y, trunk_width, trunk_height, tree_color):
+    ''' the center(x,y) of the tree is the point in the middle of its trunk '''
+    
+    bottom_trunk_y_lower_begin = y + trunk_height // 60
+    bottom_trunk_y_lower_end = y + trunk_height // 4
+    pgd.line(screen, tree_color,
+             [x, bottom_trunk_y_lower_begin], 
+             [x, bottom_trunk_y_lower_end], 
+             trunk_width // 18)
+
+    bottom_trunk_y_upper_begin = y + 17 * trunk_height // 60
+    bottom_trunk_y_upper_end = y + trunk_height // 2
+    pgd.line(screen, tree_color,
+             [x, bottom_trunk_y_upper_begin], 
+             [x, bottom_trunk_y_upper_end], 
+             trunk_width // 18)
+
+    top_trunk_coords_lower = [
+                        [x, y],
+                        [x - trunk_width // 22, y - trunk_height // 80],
+                        [x, y - 35 * trunk_height // 232],
+                        [x + trunk_width // 22, y - 16 * trunk_height // 116]
+                        ]
+    top_trunk_coords_upper = [
+                        [x + trunk_width // 80, y - trunk_height // 6 + trunk_height // 200],
+                        [x - trunk_width // 80, y - 17 * trunk_height // 96],
+                        [x + trunk_width // 18, y - trunk_height // 2 + trunk_height // 100],
+                        [x + 7 * trunk_width // 86, y - trunk_height // 2 + trunk_height // 200]
+                        ]
+    pgd.polygon(screen, tree_color,top_trunk_coords_lower)
+    
+    pgd.polygon(screen, tree_color, top_trunk_coords_upper)
+
+    
+def draw_branches (screen, x, y, trunk_width, trunk_height, tree_color):
+    ''' the center(x,y) of the tree is the point in the middle of its trunk '''
+
+    right_low_branch_x = x
+    right_low_branch_y = y - 5 * trunk_height // 57
+    right_low_branch_width = 14 * trunk_width // 35
+    right_low_branch_height = trunk_height // 2 + 5 * trunk_height // 57
+    right_low_branch_start_ang = 3 * m.pi // 7
+    right_low_branch_arc_size = 13 * m.pi // 35
+    pgd.arc(screen, tree_color,
+            [[right_low_branch_x, right_low_branch_y], 
+            [right_low_branch_width, right_low_branch_height]],
+            right_low_branch_start_ang, right_low_branch_start_ang + right_low_branch_arc_size,
+            4)
+
+    right_top_branch_x = x + trunk_width // 16
+    right_top_branch_y = y - trunk_height // 2
+    right_top_branch_width = trunk_width - trunk_width // 8
+    right_top_branch_height = 6 * trunk_height // 7
+    right_top_branch_start_ang = m.pi/2
+    right_top_branch_arc_size = 2 * m.pi // 5
+    pgd.arc(screen, tree_color,
+            [[right_top_branch_x, right_top_branch_y], 
+            [right_top_branch_width, right_top_branch_height]],
+            right_top_branch_start_ang, right_top_branch_start_ang + right_top_branch_arc_size,
+            4)
+    
+    left_top_branch_x = x - trunk_width
+    left_top_branch_y = y - trunk_height // 2
+    left_top_branch_width = trunk_width
+    left_top_branch_height = trunk_height
+    left_top_branch_start_ang = m.pi/10
+    left_top_branch_arc_size = 2 * m.pi // 5
+    pgd.arc(screen, tree_color,
+            [[left_top_branch_x, left_top_branch_y], 
+            [left_top_branch_width, left_top_branch_height]],
+            left_top_branch_start_ang, left_top_branch_start_ang + left_top_branch_arc_size,
+            4)
+
+    left_low_branch_x = x - 11 * trunk_width // 24
+    left_low_branch_y = y
+    left_low_branch_width = 11 * trunk_width // 24
+    left_low_branch_height = trunk_height // 2
+    left_low_branch_start_ang =  m.pi/6
+    left_low_branch_arc_size = 11 * m.pi // 24
+    pgd.arc(screen, tree_color,
+            [[left_low_branch_x, left_low_branch_y], 
+            [left_low_branch_width, left_low_branch_height]],
+            left_low_branch_start_ang, left_low_branch_start_ang + left_low_branch_arc_size,
+            4)
+
+
+def draw_leaves (screen, x, y, trunk_width, trunk_height, tree_color):
+    ''' the center(x,y) of the tree is the point in the middle of its trunk '''
+    
+    dist_from_trunk_to_leave = 5 * trunk_width // 37
+    right_low_leaves_y = y - trunk_height // 14
+    right_low_leaves_width = trunk_width // 40
+    right_low_leaves_height = trunk_height // 7
+    dist_between_leaves = trunk_width // 20
+    for i in range (3):
+        pgd.ellipse(screen, tree_color,
+                    [[x + dist_from_trunk_to_leave, right_low_leaves_y], 
+                    [trunk_width // 40, trunk_height // 7]])
+        dist_from_trunk_to_leave += dist_between_leaves
+
+    
+    dist_from_trunk_to_leave = trunk_width // 3
+    dist_from_ground_to_leave = 16 * trunk_height // 35
+    dist_between_leaves_x = (3 * trunk_width) // 80
+    dist_between_leaves_y = trunk_width // 70
+    right_top_leaves_width = trunk_width // 40
+    right_top_leaves_height = trunk_height // 7
+    for i in range (5):
+        pgd.ellipse(screen, tree_color,
+                    [[x + dist_from_trunk_to_leave, y - dist_from_ground_to_leave], 
+                    [right_top_leaves_width, right_top_leaves_height]])
+        dist_from_trunk_to_leave += dist_between_leaves_x
+        dist_from_ground_to_leave += dist_between_leaves_y
+
+    dist_from_trunk_to_leave = 5 * trunk_width // 16
+    dist_from_ground_to_leave = 7 * trunk_height // 16
+    dist_between_leaves_x = 3 * trunk_width // 80
+    dist_between_leaves_y = trunk_width // 70
+    left_top_leaves_width = trunk_width // 40
+    left_top_leaves_height = trunk_height // 7
+    for i in range (5):
+        pgd.ellipse(screen, tree_color,
+                    [[x - dist_from_trunk_to_leave, y - dist_from_ground_to_leave], 
+                    [left_top_leaves_width, left_top_leaves_height]])
+        dist_from_trunk_to_leave += dist_between_leaves_x
+        dist_from_ground_to_leave += dist_between_leaves_y
+
+    dist_from_trunk_to_leave = trunk_width // 6
+    dist_between_leaves = trunk_width // 20
+    left_low_leaves_width = trunk_width // 40
+    left_low_leaves_height = trunk_height // 7
+    left_low_leaves_y = y
+    for i in range (3):
+        pgd.ellipse(screen, tree_color,
+                    [[x - dist_from_trunk_to_leave, left_low_leaves_y], 
+                    [left_low_leaves_width, left_low_leaves_height]])
+        dist_from_trunk_to_leave += dist_between_leaves
+
+        
+def draw_tree (screen, x, y, trunk_width, trunk_height, tree_color):
+    ''' the center(x,y) of the tree is the point in the middle of its trunk '''
+
+    draw_trunk (screen, x, y, trunk_width, trunk_height, tree_color)
+    draw_branches (screen, x, y, trunk_width, trunk_height, tree_color)
+    draw_leaves (screen, x, y, trunk_width, trunk_height, tree_color)
+
+
+def draw_paws (screen, x, y, torso_length, torso_height, paws_color, background_color):
+    '''the center(x,y) of the panda is its nose'''
+
+    front_left_paw_coords = [
+                             [x + 28 * torso_length // 53, y - 23 * torso_height // 60],
+                             [x + 28 * torso_length // 53, y + 4 * torso_height // 60],
+                             [x + 23 * torso_length // 53, y + 20 * torso_height // 60],
+                             [x + 18 * torso_length // 53, y + 27 * torso_height // 60],
+                             [x + 4 * torso_length // 53, y + 20 * torso_height // 60],
+                             [x + 13 * torso_length // 53, y + 12 * torso_height // 60]
+                            ]
+                             
+    pgd.polygon(screen, paws_color, front_left_paw_coords)
+
+    front_right_paw_coords = [
+                              [x - 4 * torso_length // 53, y - 9 * torso_height // 60],
+                              [x + 8 * torso_length // 53, y - 3 * torso_height // 60],
+                              [x + 10 * torso_length // 53, y + 10 * torso_height // 60],
+                              [x + 3 * torso_length // 53, y + 20 * torso_height // 60],
+                              [x - 6 * torso_length // 53, y + 15 * torso_height // 60]
+                             ]
+                              
+    pgd.polygon(screen, paws_color, front_right_paw_coords)
+
+    back_paw_coords = [
+                       [x + 40 * torso_length // 53, y - 10 * torso_height // 60],
+                       [x + 40 * torso_length // 53, y + 8 * torso_height // 60],
+                       [x + 30 * torso_length // 53, y + 21 * torso_height // 60],
+                       [x + 20 * torso_length // 53, y + 15 * torso_height // 60]
+                      ]
+    pgd.polygon(screen, paws_color, back_paw_coords)
+
+
+def draw_ears (screen, x, y, torso_length, torso_height, ears_color):
+    '''the center(x,y) of the panda is its nose'''
+
+    left_ear_coords = [x + 15 * torso_length // 53, y - 30 * torso_height // 60]
+    left_ear_width = 12 * torso_length // 53
+    left_ear_height = 20 * torso_height // 60
+    pgd.ellipse(screen, ears_color,
+                [left_ear_coords,
+                [left_ear_width, left_ear_height]])
+
+    right_ear_coords = [x - 6 * torso_length // 53, y - 32 * torso_height // 60]
+    right_ear_width = 16 * torso_length // 53
+    right_ear_height = 15 * torso_height // 60
+    pgd.ellipse(screen, ears_color,
+                [right_ear_coords,
+                [right_ear_width, right_ear_height]])
+
+
+def draw_nose (screen, x, y, torso_length, torso_height, nose_color):
+    '''the center(x,y) of the panda is its nose'''
+
+    nose_coors = [x - 3 * torso_length // 50, y - 3 * torso_height // 55]
+    nose_width = 3 * torso_length // 25
+    nose_height = 4 * torso_height // 55
+    pgd.ellipse(screen, nose_color, [nose_coors, 
+                [nose_width, nose_height]])
+
+
+def draw_head (screen, x, y, torso_length, torso_height, head_color, background_color):
+    '''the center(x,y) of the panda is its nose'''
+
+    head_coords = [
+                    [x, y],
+                    [x + 25 * torso_length // 55, y - 7 * torso_height // 65],
+                    [x + 25 * torso_length // 55, y - 25 * torso_height // 65],
+                    [x + 25 * torso_length // 110, y - 35 * torso_height // 65],
+                    [x, y - 30 * torso_height // 65],
+                    [x - 5 * torso_length // 55, y - 30 * torso_height // 130]
+                  ]
+                  
+    pgd.polygon(screen, head_color, head_coords)
+
+    above_head_coords = [
+                          [x + 25 * torso_length // 110, y - 35 * torso_height // 63],
+                          [x + 9 * torso_length // 53, y - 31 * torso_height // 60],
+                          [x + 15 * torso_length // 53, y - 30 * torso_height // 60]
+                        ]
+    pgd.polygon(screen, background_color, above_head_coords)
+
+
+def draw_eyes (screen, x, y, torso_length, torso_height, eyes_color):
+    '''the center(x,y) of the panda is its nose'''
+
+    right_eye_coords = [x - 5 * torso_length // 53, y - 15 * torso_height // 60]
+    right_eye_width = 6 * torso_length // 53
+    right_eye_height = 7 * torso_height // 60
+    pgd.ellipse(screen, eyes_color, [right_eye_coords,
+                [right_eye_width, right_eye_height]])
+
+    left_eye_coords = (x + 10 * torso_length // 53, y - 10 * torso_height // 60)
+    left_eye_radius = 4 * torso_length // 53
+    pgd.circle(screen, eyes_color, left_eye_coords, left_eye_radius)
+
+
+def draw_torso (screen, x, y, torso_length, torso_height, torso_color):
+    '''the center(x,y) of the panda is its nose'''
+
+    torso_coords = [x - 5 * torso_length // 53, y - 25 * torso_height // 60]
+
+    pgd.ellipse(screen, torso_color, [torso_coords,
+                [47 * torso_length // 53, 27 * torso_height // 60]])
+
+
+def draw_panda(screen, x, y,
+               torso_length, torso_height,
+               torso_color, paws_color, head_color,
+               ears_color, eyes_color, nose_color,
+               background_color):
+    '''the center(x,y) of the panda is its nose'''
+    
+    draw_torso (screen, x, y, torso_length, torso_height, torso_color)
+    draw_paws (screen, x, y, torso_length, torso_height, paws_color, background_color)
+    draw_ears (screen, x, y, torso_length, torso_height, ears_color)
+    draw_head (screen, x, y, torso_length, torso_height, head_color, background_color)
+    draw_nose (screen, x, y, torso_length, torso_height, nose_color)
+    draw_eyes (screen, x, y, torso_length, torso_height, eyes_color) 
+
+
 FPS = 30
 background_color = (255, 184, 135)
 display_size = (1300, 700)
-tree_color = (0, 80, 31)
 panda_color_black = (0, 0, 0)
 panda_color_white = (255, 255, 255)
+tree_color = (0, 80, 31)
 
-#set surface
+
 screen = pg.display.set_mode(display_size)
 screen.fill(background_color)
 
-#body
-draw_tree(screen, 550, 225, 600, 430, tree_color)
-draw_tree(screen, 370, 300, 230, 325, tree_color)
-draw_tree(screen, 160, 310, 300, 300, tree_color)
-draw_tree(screen, 1120, 225, 270, 410, tree_color)
-draw_panda(screen, 600, 400, 250, 270, panda_color_black, panda_color_white, background_color)
-draw_panda(screen, 480, 500, 100, 110, panda_color_black, panda_color_white, background_color)
+draw_tree(screen,
+          11 * display_size[0] // 26, 9 * display_size[1] // 28,
+          6 * display_size[0] // 13, 43 * display_size[1] // 70,
+          tree_color)
+
+draw_tree(screen,
+          37 * display_size[0] // 130, 3 * display_size[1] // 7,
+          23 * display_size[0] // 130, 13 * display_size[1] // 28,
+          tree_color)
+
+draw_tree(screen,
+          8 * display_size[0] // 65, 31 * display_size[1] // 70,
+          3 * display_size[0] // 13, 3 * display_size[1] // 7,
+          tree_color)
+
+draw_tree(screen,
+          56 * display_size[0] // 65, 9 * display_size[1] // 28,
+          27 * display_size[0] // 130, 41 * display_size[1] // 70,
+          tree_color)
+
+draw_panda(screen,
+           6 * display_size[0] // 13, 4 * display_size[1] // 7,
+           5 * display_size[0] // 26, 27 * display_size[1] // 70,
+           panda_color_white, panda_color_black, panda_color_white,
+           panda_color_black, panda_color_black, panda_color_black,
+           background_color)
+
+draw_panda(screen,
+           24 * display_size[0] // 65, 5 * display_size[1] // 7,
+           display_size[0] // 13, 11 * display_size[1] // 70,
+           panda_color_white, panda_color_black, panda_color_white,
+           panda_color_black, panda_color_black, panda_color_black,
+           background_color)
 
 pg.display.update()
 clock = pg.time.Clock()
@@ -166,3 +330,4 @@ while not finished:
             finished = True
 
 pg.quit()
+
